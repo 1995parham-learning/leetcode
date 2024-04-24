@@ -17,10 +17,11 @@ They may not be the most optimized or comprehensive solutions for every problem.
 Each solution is stored in its respective directory, named after the LeetCode problem number and title.
 For example:
 
--  `1-two-sum/`
+- `1/`
 
 ## How to Use
+
 To run a solution, navigate to the problem's directory and run the appropriate command for the language:
 
--  Python: `python solution.py`
--  Go: `go run solution.go`
+- Python: `python solution.py`
+- Go: `go run solution.go`
