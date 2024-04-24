@@ -2,5 +2,7 @@
 
 ## Introduction
 
-This repository is a collection of my solutions to problems on [LeetCode](https://leetcode.com/), a popular online platform that helps programmers
-hone their coding skills through a variety of coding challenges. My solutions are written in Go and Python.
+This repository contains my solutions to problems on [LeetCode](https://leetcode.com/),
+a popular online platform for programmers to practice and improve their coding skills.
+LeetCode offers a wide range of coding challenges that cover various computer science topics.
+My solutions are written in both Go and Python.
