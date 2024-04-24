@@ -12,8 +12,15 @@ My solutions are written in both Go and Python.
 These solutions are intended to provide guidance and approach problem-solving on LeetCode.
 They may not be the most optimized or comprehensive solutions for every problem.
 
-## Organization
+## Repository Structure
 
-The solutions within this repository are organized by LeetCode problem number.
-This allows you to easily find solutions for specific problems you're working on.
+Each solution is stored in its respective directory, named after the LeetCode problem number and title.
+For example:
 
+-  `1-two-sum/`
+
+## How to Use
+To run a solution, navigate to the problem's directory and run the appropriate command for the language:
+•  Python: `python solution.py`
+
+•  Go: `go run solution.go`
