@@ -21,6 +21,6 @@ For example:
 
 ## How to Use
 To run a solution, navigate to the problem's directory and run the appropriate command for the language:
-•  Python: `python solution.py`
 
-•  Go: `go run solution.go`
+-  Python: `python solution.py`
+-  Go: `go run solution.go`
