@@ -5,7 +5,6 @@ import (
 	"log"
 	"slices"
 	"strings"
-	"testing/quick"
 )
 
 func main() {
@@ -26,10 +25,9 @@ func main() {
 			target: "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven",
 		},
 	} {
-		if err := quick.Check(func() bool {
-			return numberToWords(c.nums) == c.target
-		}, nil); err != nil {
-			log.Fatal(err)
+		cal := numberToWords(c.nums)
+		if cal != c.target {
+			log.Fatalf("%s is not equal to %s", cal, c.target)
 		}
 	}
 }

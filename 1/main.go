@@ -3,11 +3,10 @@ package main
 import (
 	"log"
 	"slices"
-	"testing/quick"
 )
 
 func twoSum(nums []int, target int) []int {
-	for i := 0; i < len(nums); i++ {
+	for i := range len(nums) {
 		for j := i + 1; j < len(nums); j++ {
 			if nums[i]+nums[j] == target {
 				return []int{i, j}
@@ -39,13 +38,13 @@ func main() {
 			output: []int{0, 1},
 		},
 	} {
-		if err := quick.Check(func() bool {
-			return slices.Equal(
-				twoSum(c.nums, c.target),
-				c.output,
-			)
-		}, nil); err != nil {
-			log.Fatal(err)
+		cal := twoSum(c.nums, c.target)
+
+		if !slices.Equal(
+			cal,
+			c.output,
+		) {
+			log.Fatalf("%v is not equal to expected value %v", cal, c.output)
 		}
 	}
 }
