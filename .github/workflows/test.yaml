@@ -1,0 +1,71 @@
+name: Run Go and Python Codes
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  run-files:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false # Don't cancel other jobs if one fails
+      matrix:
+        file: ${{ fromJson(needs.find-files.outputs.files) }}
+
+    needs: find-files # This job depends on the find-files job
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Go (if a Go file)
+        if: endsWith(matrix.file, '.go')
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+
+      - name: Setup Python (if a Python file)
+        if: endsWith(matrix.file, '.py')
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Run Go file
+        if: endsWith(matrix.file, '.go')
+        run: |
+          echo "Attempting to run Go file: ${{ matrix.file }}"
+          # Navigate to the directory containing the Go file
+          pushd "$(dirname ${{ matrix.file }})"
+          go run "$(basename ${{ matrix.file }})"
+          popd
+        working-directory: ${{ github.workspace }}
+
+      - name: Run Python file
+        if: endsWith(matrix.file, '.py')
+        run: |
+          echo "Attempting to run Python file: ${{ matrix.file }}"
+          python ${{ matrix.file }}
+        working-directory: ${{ github.workspace }}
+
+  find-files:
+    runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.list-files.outputs.files }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Find main.go and main.py files
+        id: list-files
+        run: |
+          GO_FILES=$(find . -name "main.go" | jq -R . | jq -s .)
+          PYTHON_FILES=$(find . -name "main.py" | jq -R . | jq -s .)
+          ALL_FILES=$(echo "$GO_FILES $PYTHON_FILES" | jq -s 'add | unique')
+          echo "Found files: $ALL_FILES"
+          echo "files=$ALL_FILES" >> "$GITHUB_OUTPUT"
