@@ -28,11 +28,9 @@ def valid_path(n: int, edges: list[list[int]], source: int, destination: int) ->
 
 
 if __name__ == "__main__":
-    assert (
-        valid_path(
-            n=3,
-            edges=[[0, 1], [1, 2], [2, 0]],
-            source=0,
-            destination=2,
-        )
+    assert valid_path(
+        n=3,
+        edges=[[0, 1], [1, 2], [2, 0]],
+        source=0,
+        destination=2,
     )
