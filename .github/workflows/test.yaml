@@ -9,14 +9,23 @@ on:
       - main
   workflow_dispatch:
 jobs:
-  lint:
+  golangci-lint:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v8
 
-      - name: Run Ruff
-        uses: astral-sh/ruff-action@v3
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/ruff-action@v3
+      - run: ruff check
+      - run: ruff format --check
 
   run-files:
     runs-on: ubuntu-latest
@@ -29,14 +38,13 @@ jobs:
     needs: find-files # This job depends on the find-files job
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup Go (if a Go file)
         if: endsWith(matrix.file, '.go')
         uses: actions/setup-go@v5
         with:
-          go-version: "1.24"
+          go-version: stable
 
       - name: Setup Python (if a Python file)
         if: endsWith(matrix.file, '.py')
@@ -66,9 +74,7 @@ jobs:
     outputs:
       files: ${{ steps.list-files.outputs.files }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Find main.go and main.py files
         id: list-files
         run: |
