@@ -35,5 +35,4 @@ if __name__ == "__main__":
             source=0,
             destination=2,
         )
-        == True
     )
