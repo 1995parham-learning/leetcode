@@ -22,5 +22,5 @@ def can_jump(nums: list[int]) -> bool:
 
 
 if __name__ == "__main__":
-    assert can_jump([2, 3, 1, 1, 4]) == True
-    assert can_jump([3, 2, 1, 0, 4]) == False
+    assert can_jump([2, 3, 1, 1, 4])
+    assert not can_jump([3, 2, 1, 0, 4])

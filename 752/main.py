@@ -21,9 +21,9 @@ def open_lock(deadends: collections.abc.Collection[str], target: str) -> int:
             return height
 
         for i, d in itertools.product(range(4), [1, -1]):
-            l = list(current)
-            l[i] = str((int(l[i]) + d) % 10)
-            t = "".join(l)
+            current_list = list(current)
+            current_list[i] = str((int(current_list[i]) + d) % 10)
+            t = "".join(current_list)
 
             if t not in seen and t not in deadends:
                 seen.add(t)
