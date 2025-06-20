@@ -29,11 +29,23 @@ jobs:
         with:
           go-version: "1.24"
 
+      - name: Run golangci-lint (if a Go file)
+        if: endsWith(matrix.file, '.go')
+        uses: golangci/golangci-lint-action@v8
+        with:
+          working-directory: ${{ matrix.file }}
+
       - name: Setup Python (if a Python file)
         if: endsWith(matrix.file, '.py')
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+
+      - name: Run Ruff (if a Python file)
+        if: endsWith(matrix.file, '.py')
+        uses: astral-sh/ruff-action@v3
+        with:
+          src: ${{ matrix.file }}
 
       - name: Run Go file
         if: endsWith(matrix.file, '.go')
