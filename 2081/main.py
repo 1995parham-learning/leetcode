@@ -74,3 +74,5 @@ def palindrome_numbers() -> Generator[int]:
 if __name__ == "__main__":
     for i in palindrome_numbers():
         print(i)
+        if i > 100:
+            break
