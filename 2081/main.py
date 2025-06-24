@@ -23,7 +23,7 @@ def palindrome_numbers() -> Generator[int]:
         yield i
 
     # Step 2: Generate multi-digit palindromes based on length
-    current_length = 2 # Start with palindromes of length 2
+    current_length = 2  # Start with palindromes of length 2
 
     while True:
         # Determine the range for the 'first half' number based on the current_length
@@ -39,13 +39,13 @@ def palindrome_numbers() -> Generator[int]:
         # Determine the start and end values for the 'half' number
         # Example: For half_string_len = 1 (palindromes like 11, 101), half goes from 1 to 9.
         # Example: For half_string_len = 2 (palindromes like 1001, 10001), half goes from 10 to 99.
-        start_half_num = 10**(half_string_len - 1) if half_string_len > 0 else 1
+        start_half_num = 10 ** (half_string_len - 1) if half_string_len > 0 else 1
         end_half_num = (10**half_string_len) - 1 if half_string_len > 0 else 9
 
         # Iterate through all possible 'first half' numbers for the current length
         for half in range(start_half_num, end_half_num + 1):
             s_half = str(half)
-            s_reversed_half = s_half[::-1] # Reverse the 'first half' string
+            s_reversed_half = s_half[::-1]  # Reverse the 'first half' string
 
             if current_length % 2 == 0:
                 # Construct even length palindrome: first_half + reversed(first_half)
@@ -68,7 +68,8 @@ def palindrome_numbers() -> Generator[int]:
                 for mid_digit in range(10):
                     yield int(s_half + str(mid_digit) + s_reversed_half)
 
-        current_length += 1 # Move to the next palindrome length
+        current_length += 1  # Move to the next palindrome length
+
 
 if __name__ == "__main__":
     for i in palindrome_numbers():
