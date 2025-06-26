@@ -1,3 +1,4 @@
+import itertools
 from typing import Generator
 
 
@@ -72,7 +73,5 @@ def palindrome_numbers() -> Generator[int]:
 
 
 if __name__ == "__main__":
-    for i in palindrome_numbers():
+    for i in itertools.islice(palindrome_numbers(), 100):
         print(i)
-        if i > 100:
-            break
